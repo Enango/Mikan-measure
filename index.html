@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ミカンサイズ測定</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>ミカンサイズ測定</h1>
+    <p>ARマーカー(20mm)との比で計測し、動画中の<strong>最小値</strong>を採用します</p>
+  </header>
+
+  <main>
+    <section class="stage">
+      <div class="video-wrap">
+        <video id="video" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+      </div>
+      <div class="controls">
+        <button id="btnCamera">カメラを使う</button>
+        <label class="file-btn">動画ファイルを選ぶ
+          <input type="file" id="fileInput" accept="video/*" hidden>
+        </label>
+        <button id="btnStart" class="primary">計測開始</button>
+        <button id="btnStop">停止</button>
+        <button id="btnReset">最小値をリセット</button>
+      </div>
+      <p id="status" class="status">待機中</p>
+    </section>
+
+    <section class="panel">
+      <h2>計測結果</h2>
+      <div class="result-grid">
+        <div class="card">
+          <span class="label">現在値(直径)</span>
+          <span class="value" id="curVal">--</span>
+        </div>
+        <div class="card main">
+          <span class="label">最小値(採用値)</span>
+          <span class="value" id="minVal">--</span>
+        </div>
+        <div class="card">
+          <span class="label">有効フレーム数</span>
+          <span class="value" id="frameCount">0</span>
+        </div>
+      </div>
+      <p class="detail" id="minDetail">幅 -- / 高さ --</p>
+      <button id="btnCopy">最小値をコピー</button>
+
+      <h2>設定</h2>
+      <div class="settings">
+        <label>公開可能APIキー (rf_...)
+          <input type="text" id="apiKey" placeholder="rf_xxxxxxxx" autocomplete="off">
+        </label>
+        <label>モデルID(プロジェクトID)
+          <input type="text" id="modelName" placeholder="例: project-name">
+        </label>
+        <label>バージョン
+          <input type="number" id="modelVersion" value="6" min="1">
+        </label>
+        <label>信頼度のしきい値
+          <input type="number" id="confidence" value="0.5" min="0.1" max="1" step="0.05">
+        </label>
+        <label>マーカー1辺の長さ(mm・黒枠の外側)
+          <input type="number" id="markerMm" value="20" min="1" step="0.5">
+        </label>
+        <label>マーカーID(空欄なら最初に見つかったもの)
+          <input type="number" id="markerId" placeholder="任意">
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <!-- 推論ライブラリ(Roboflow公式)。本番では版数を固定してください -->
+  <script src="https://cdn.jsdelivr.net/npm/inferencejs"></script>
+  <!-- js-aruco (https://github.com/jcmellado/js-aruco の src/cv.js と src/aruco.js をこのフォルダに置く) -->
+  <script src="cv.js"></script>
+  <script src="aruco.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
