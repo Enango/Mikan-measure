@@ -1,0 +1,125 @@
+:root {
+  --bg: #fffaf2;
+  --surface: #ffffff;
+  --text: #2b2118;
+  --muted: #7a6a5a;
+  --accent: #f28c1b;
+  --accent-dark: #c96d05;
+  --border: #ecdcc6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1712;
+    --surface: #2a231b;
+    --text: #f5ece0;
+    --muted: #b7a692;
+    --accent: #f5a03a;
+    --accent-dark: #ffb85c;
+    --border: #44392c;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header { padding: 16px 20px 0; }
+header h1 { margin: 0 0 4px; font-size: 1.5rem; }
+header p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 800px) {
+  main { grid-template-columns: 1fr; }
+}
+
+.video-wrap {
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.video-wrap video,
+.video-wrap canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+button, .file-btn {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover, .file-btn:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.primary:hover { background: var(--accent-dark); }
+
+.status { color: var(--muted); font-size: 0.9rem; min-height: 1.4em; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  align-self: start;
+}
+
+.panel h2 { font-size: 1.05rem; margin: 0 0 10px; }
+.panel h2:not(:first-child) { margin-top: 22px; }
+
+.result-grid { display: grid; gap: 8px; }
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.card.main { border-color: var(--accent); }
+.card .label { color: var(--muted); font-size: 0.85rem; }
+.card .value { font-size: 1.4rem; font-weight: 700; }
+.card.main .value { color: var(--accent-dark); font-size: 1.8rem; }
+
+.detail { color: var(--muted); font-size: 0.85rem; }
+
+.settings { display: grid; gap: 10px; }
+.settings label { display: grid; gap: 4px; font-size: 0.85rem; color: var(--muted); }
+.settings input {
+  font: inherit;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
