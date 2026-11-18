@@ -9,7 +9,8 @@ const octx = overlay.getContext("2d");
 const work = document.createElement("canvas");
 const wctx = work.getContext("2d", { willReadFrequently: true });
 
-const detector = new AR.Detector(); // 辞書は js-aruco 標準(ARUCO)
+// 使用中のマーカーは 4x4 辞書(ID 8)。js-aruco2 の 'ARUCO_4X4_1000' を使う
+const detector = new AR.Detector({ dictionaryName: "ARUCO_4X4_1000", maxHammingDistance: 1 });
 
 let engine = null;
 let workerId = null;
